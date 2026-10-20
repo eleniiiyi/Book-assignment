@@ -34,12 +34,10 @@ server.get("/books/:id", (req, res) => {
 server.get("/books", (req, res) => {
   const genre = req.query.genre;
 
-  // no filter, send all books
   if (!genre) {
     return res.json(books);
   }
 
-  // filter by genre (ignore upper/lower case)
   const result = books.filter(
     (book) => book.genre.toLowerCase() === genre.toLowerCase()
   );
