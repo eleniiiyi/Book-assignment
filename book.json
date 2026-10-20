@@ -1,1 +1,7 @@
-{"id":1,"title":"Harry Potter","author":"J.K. Rowling","genre":"Fantasy","year":1997}
+{
+  "id": 1,
+  "title": "Harry Potter",
+  "author": "J.K. Rowling",
+  "genre": "Fantasy",
+  "year": 1997
+}

@@ -1,7 +1,6 @@
 // Part 1: Files
-const fs = require("fs");
+import fs from "fs/promises"
 
-// 1. Create one book object and save it to a file
 const book = {
   id: 1,
   title: "Harry Potter",
@@ -10,16 +9,16 @@ const book = {
   year: 1997,
 };
 
-fs.writeFileSync("book.json", JSON.stringify(book));
+await fs.writeFile("book.json", JSON.stringify(book, null, 2));
+console.log("File saved");
 
 // 2. Read the file back and show the book in one line
-const bookData = fs.readFileSync("book.json", "utf8");
-const bookFromFile = JSON.parse(bookData);
+const bookText = await fs.readFile("book.json", "utf8");
+const bookData = JSON.parse(bookText)
+console.log(bookData.id, bookData.title, bookData.author, bookData.genre, bookData.year);
 
-console.log(
-  bookFromFile.id + ". " + bookFromFile.title + " by " + bookFromFile.author +
-  " (" + bookFromFile.genre + ", " + bookFromFile.year + ")"
-);
+
+
 
 // 3. Create an array of at least 6 books and save it to a file
 const books = [
@@ -31,15 +30,15 @@ const books = [
   { id: 6, title: "Things Fall Apart", author: "Chinua Achebe", genre: "Historical", year: 1958 },
 ];
 
-fs.writeFileSync("books.json", JSON.stringify(books));
+await fs.writeFile("books.json", JSON.stringify(books, null, 2));
+console.log("Books file saved");
 
 // 4. Read the array file back
-const booksData = fs.readFileSync("books.json", "utf8");
-const booksFromFile = JSON.parse(booksData);
+const booksText = await fs.readFile("books.json", "utf8");
+const booksData = JSON.parse(booksText)
 
-console.log("Number of books: " + booksFromFile.length);
+console.log("Number of books: " + booksData.length);
 
-for (let i = 0; i < booksFromFile.length; i++) {
-  const b = booksFromFile[i];
-  console.log(b.id + ". " + b.title + " by " + b.author + " (" + b.genre + ", " + b.year + ")");
+for (const b of booksData) {
+  console.log(b.id, b.title, b.author, b.genre, b.year);
 }
