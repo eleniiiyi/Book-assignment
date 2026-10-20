@@ -1,4 +1,3 @@
-// Part 2: Server
 import express from "express"
 
 const books = [
@@ -12,22 +11,14 @@ const books = [
 
 const server = express();
 
-// GET /
 server.get("/", (req, res) => {
   res.send("Welcome to the Books API");
 });
 
-// GET /books  
-server.get("/books", (req, res) => {
-    res.json(books);
-});
-
-// GET /books/count
 server.get("/books/count", (req, res) => {
   res.json({ count: books.length });
 });
 
-// GET /books/:id
 server.get("/books/:id", (req, res) => {
   const id = Number(req.params.id);
   const book = books.find((b) => b.id === id);
@@ -40,7 +31,6 @@ server.get("/books/:id", (req, res) => {
   res.json(book);
 });
 
-// GET /books?genre=Fantasy
 server.get("/books", (req, res) => {
   const genre = req.query.genre;
 
