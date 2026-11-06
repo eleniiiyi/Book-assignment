@@ -23,12 +23,13 @@ server.get("/books/:id", (req, res) => {
   const id = Number(req.params.id);
   const book = books.find((b) => b.id === id);
   
-  if (!book) {
-    res.writeHead(404, { "Content-Type": "application/json" });
-    return res.end(JSON.stringify({ error: "Book not found" }));
+  if (book) {
+    res.json(book);
   }
-
-  res.json(book);
+  else {
+    res.status(400).json({error: "Book not found"})
+  }
+  
 });
 
 server.get("/books", (req, res) => {
@@ -42,7 +43,11 @@ server.get("/books", (req, res) => {
     (book) => book.genre.toLowerCase() === genre.toLowerCase()
   );
 
-  // if nothing matches, result is just []
+  if (result.length === 0) {
+    res.status(400).json({error: "no item having this genere is found"})
+  }
+
+
   res.json(result);
 });
 
